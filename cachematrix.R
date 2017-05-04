@@ -3,19 +3,24 @@
 
 ## Write a short comment describing this function
 
+# This function wraps your matrix in a structure that allows you to
+# recover the original matrix, and calculate and cache the inverted matrix.
 makeCacheMatrix <- function(x = matrix()) {
   cachedInverse <- NULL
-  getMatrix     <- function ()  x 
-  inverse       <- function ()  cacheSolve(x)
+  getMatrix     <- function ()  x
+  inverse       <- function ()  cacheSolve(l)
   getInverse    <- function ()  cachedInverse
   setInverse    <- function (i) cachedInverse <<- i
-  
-  list(getMatrix = getMatrix, inverse = inverse, setInverse = setInverse, getInverse = getInverse)
+
+  l <- list(getMatrix = getMatrix, inverse = inverse, setInverse = setInverse, getInverse = getInverse)
+
+  l
 }
 
 
-## Write a short comment describing this function
-
+## Given a "cache matrix" structure as defined above, will
+# compute and cache a matrix inverse, or return a previously-cached
+# inverse matrix.
 cacheSolve <- function(x, ...) {
   if (is.null(x$getInverse())) {
     x$setInverse(solve(x$getMatrix(), ...))
